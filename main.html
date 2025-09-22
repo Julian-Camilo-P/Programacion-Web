@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victorem - Inicio</title>
+  <style>
+    /* Estilos generales */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header */
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .logo {
+      height: 40px;
+    }
+    
+    .logo-text {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 20px;
+    }
+    
+    nav ul li a {
+      transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+      color: #d4af37;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1920x600') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    
+    .hero-logo {
+      max-width: 200px;
+      margin: 0 auto 20px;
+      display: block;
+    }
+    
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+    
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: #d4af37;
+      color: #fff;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 0 10px;
+    }
+    
+    .btn:hover {
+      background-color: #b8941f;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid #d4af37;
+    }
+    
+    .btn-outline:hover {
+      background-color: #d4af37;
+    }
+    
+    /* Secciones generales */
+    .section {
+      padding: 80px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 36px;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background-color: #d4af37;
+      margin: 15px auto;
+    }
+    
+    /* Productos/Catálogo */
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    
+    .card p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    .price {
+      font-weight: bold;
+      color: #d4af37;
+      font-size: 18px;
+    }
+    
+    /* Proceso de personalización */
+    .proceso {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+    
+    .proceso-paso {
+      flex: 0 0 23%;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .proceso-paso h3 {
+      margin: 15px 0;
+      font-size: 18px;
+    }
+    
+    /* Testimonios */
+    .testimonios {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .testimonio {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .testimonio p {
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+    
+    .cliente {
+      font-weight: bold;
+    }
+    
+    .estrellas {
+      color: #d4af37;
+      margin-bottom: 10px;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: #222;
+      color: #fff;
+      padding: 50px 0 20px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-section h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      position: relative;
+    }
+    
+    .footer-section h3::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background-color: #d4af37;
+      margin-top: 10px;
+    }
+    
+    .footer-section ul {
+      list-style: none;
+    }
+    
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-section ul li a:hover {
+      color: #d4af37;
+    }
+    
+    .metodos-pago {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .metodo-pago {
+      background-color: #fff;
+      color: #333;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+      }
+      
+      nav ul {
+        margin-top: 15px;
+      }
+      
+      .hero h1 {
+        font-size: 36px;
+      }
+      
+      .hero p {
+        font-size: 18px;
+      }
+      
+      .proceso-paso {
+        flex: 0 0 48%;
+      }
+      
+      .btn {
+        display: block;
+        margin: 10px auto;
+        width: 80%;
+        max-width: 250px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .proceso-paso {
+        flex: 0 0 100%;
+      }
+      
+      .hero {
+        padding: 60px 20px;
+      }
+      
+      .logo-container {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo-container">
+        <img src="imagenes/logo.png" alt="Victorem Logo" class="logo">
+        <div class="logo-text">VICTOREM</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="main.html">Inicio</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="personalizacion.html">Personaliza</a></li>
+          <li><a href="historia.html">Historia</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1920x600') center/cover no-repeat;">
+    <div class="container">
+      <img src="imagenes/logo.png" alt="Victorem Logo" class="hero-logo">
+      <h1>VICTOREM</h1>
+      <p>Arte en cada balín, elegancia en cada detalle</p>
+      <p>Descubre la perfecta fusión entre tradición artesanal y diseño contemporáneo en cada una de nuestras creaciones únicas</p>
+      <div style="margin-top: 30px;">
+        <a href="catalogo.html" class="btn">Explorar Catálogo</a>
+        <a href="personalizacion.html" class="btn btn-outline">Crear Joya Única</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de productos destacados -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Productos Destacados</h2>
+      <div class="productos">
+        <div class="card">
+          <img src="imagenes/balines dorados.jpeg" alt="Pulsera Clásica Dorada" class="card-img">
+          <div class="card-content">
+            <h3>Pulsera Clásica Dorada</h3>
+            <p>Técnica tradicional en balinería con oro laminado 18K</p>
+            <p class="price">$125.000</p>
+            <a href="catalogo.html" class="btn">Ver Detalles</a>
+          </div>
+        </div>
+        
+        <div class="card">
+          <img src="imagenes/van cleef dorada.jpeg" alt="Pulsera Elegance" class="card-img">
+          <div class="card-content">
+            <h3>Pulsera Elegance</h3>
+            <p>Diseño oxidado con balinería de diferentes tamaños</p>
+            <p class="price">$135.000</p>
+            <a href="catalogo.html" class="btn">Ver Detalles</a>
+          </div>
+        </div>
+        
+        <div class="card">
+          <img src="imagenes/van cleef negra.jpeg" alt="Pulsera Premium Luxury" class="card-img">
+          <div class="card-content">
+            <h3>Pulsera Premium Luxury</h3>
+            <p>Edición limitada con balinería especial y acabado premium</p>
+            <p class="price">$175.000</p>
+            <a href="catalogo.html" class="btn">Ver Detalles</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de testimoniales -->
+  <section class="section" style="background: url('https://via.placeholder.com/1920x600/333333/ffffff?text=Patrón+de+Textura') repeat;">
+    <div class="container">
+      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+      <div class="testimonios">
+        <div class="testimonio">
+          <div class="estrellas">★★★★★</div>
+          <p>"La calidad es excepcional. Mi manilla personalizada es una obra de arte que uso todos los días. El proceso de personalización fue muy fácil y el resultado superó mis expectativas."</p>
+          <div class="cliente">María González</div>
+        </div>
+        
+        <div class="testimonio">
+          <div class="estrellas">★★★★★</div>
+          <p>"Compré un anillo para mi esposa y quedó encantada. La atención al detalle y la elegancia del diseño son incomparables. Definitivamente volveré por más piezas."</p>
+          <div class="cliente">Carlos Rodríguez</div>
+        </div>
+        
+        <div class="testimonio">
+          <div class="estrellas">★★★★★</div>
+          <p>"El trabajo artesanal es impresionante. Cada balín está perfectamente colocado y el acabado en oro es hermoso. Es una inversión que vale la pena para una joya única."</p>
+          <div class="cliente">Ana Martínez</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>VICTOREM</h3>
+          <p>Arte en cada balín, elegancia en cada detalle. Creamos joyas únicas que trascienden el tiempo.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Contacto</h3>
+          <ul>
+            <li>Calle 20 #9-88, Campooligre, Huila</li>
+            <li>+57 300 123 4567</li>
+            <li>info@victorem.co</li>
+            <li>Lun - Sáb: 9:00 AM - 6:00 PM</li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Enlaces</h3>
+          <ul>
+            <li><a href="#">Política de privacidad</a></li>
+            <li><a href="#">Términos y condiciones</a></li>
+            <li><a href="#">Galería</a></li>
+            <li><a href="#">Cuidado de joyas</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Formas de pago</h3>
+          <div class="metodos-pago">
+            <span class="metodo-pago">VISA</span>
+            <span class="metodo-pago">MC</span>
+            <span class="metodo-pago">AMEX</span>
+            <span class="metodo-pago">PSE</span>
+            <span class="metodo-pago">EFECTY</span>
+            <span class="metodo-pago">NEQUI</span>
+          </div>
+          <p style="margin-top: 15px;">Envíos seguros a toda Colombia</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2024 Victorem. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
