@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Victorem - Inicio</title>
+  <link rel="icon" type="image/x-icon" href="imagenes/logo.png">
   <style>
     /* Estilos generales */
     * {
@@ -81,7 +82,7 @@
     
     /* Hero Section */
     .hero {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1920x600') center/cover no-repeat;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), center/cover no-repeat;
       color: #fff;
       text-align: center;
       padding: 100px 20px;
@@ -527,7 +528,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1920x600') center/cover no-repeat;">
+  <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('imagenes/textura.png') center/cover no-repeat;">
     <div class="container">
       <img src="imagenes/logo.png" alt="Victorem Logo" class="hero-logo">
       <h1>VICTOREM</h1>
@@ -731,7 +732,7 @@
       function checkAuthStatus() {
         const user = JSON.parse(localStorage.getItem('currentUser'));
         if (user) {
-          // Usuario autenticado
+          // Usuario autenticado - CORREGIDO: Agregar enlace a miperfil.html
           authNav.innerHTML = `
             <div class="user-menu">
               <button class="user-menu-btn">
@@ -739,7 +740,7 @@
                 <span>▼</span>
               </button>
               <div class="user-dropdown">
-                <a href="#" id="profileLink">Mi Perfil</a>
+                <a href="miperfil.html" id="profileLink">Mi Perfil</a>
                 <a href="#" id="logoutLink">Cerrar Sesión</a>
               </div>
             </div>
