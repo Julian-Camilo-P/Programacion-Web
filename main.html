@@ -310,6 +310,149 @@
       border-top: 1px solid #444;
     }
     
+    /* Estilos para el sistema de autenticación */
+    .auth-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 70vh;
+      padding: 40px 0;
+    }
+    
+    .auth-form {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 450px;
+    }
+    
+    .auth-form h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #222;
+      font-size: 28px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    
+    .form-group input:focus {
+      border-color: #d4af37;
+      outline: none;
+    }
+    
+    .auth-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #d4af37;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+    }
+    
+    .auth-btn:hover {
+      background-color: #b8941f;
+    }
+    
+    .auth-switch {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .auth-switch a {
+      color: #d4af37;
+      font-weight: bold;
+    }
+    
+    .auth-switch a:hover {
+      text-decoration: underline;
+    }
+    
+    .error-message {
+      color: #e74c3c;
+      background-color: #fadbd8;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      text-align: center;
+      display: none;
+    }
+    
+    .success-message {
+      color: #27ae60;
+      background-color: #d5f4e6;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      text-align: center;
+      display: none;
+    }
+    
+    .user-menu {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .user-menu-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .user-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: #fff;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      z-index: 1;
+    }
+    
+    .user-dropdown a {
+      color: #333;
+      padding: 12px 16px;
+      display: block;
+    }
+    
+    .user-dropdown a:hover {
+      background-color: #f1f1f1;
+      color: #d4af37;
+    }
+    
+    .user-menu:hover .user-dropdown {
+      display: block;
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
       .header-container {
@@ -337,6 +480,10 @@
         margin: 10px auto;
         width: 80%;
         max-width: 250px;
+      }
+      
+      .auth-form {
+        padding: 20px;
       }
     }
     
@@ -371,6 +518,9 @@
           <li><a href="personalizacion.html">Personaliza</a></li>
           <li><a href="historia.html">Historia</a></li>
           <li><a href="contacto.html">Contacto</a></li>
+          <li id="auth-nav">
+            <!-- El contenido de este elemento se actualizará dinámicamente -->
+          </li>
         </ul>
       </nav>
     </div>
@@ -502,5 +652,275 @@
       </div>
     </div>
   </footer>
+
+  <!-- Modal para inicio de sesión -->
+  <div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div class="auth-form">
+      <h2>Iniciar Sesión</h2>
+      <div id="loginError" class="error-message"></div>
+      <div id="loginSuccess" class="success-message"></div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Correo Electrónico</label>
+          <input type="email" id="loginEmail" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Contraseña</label>
+          <input type="password" id="loginPassword" name="password" required>
+        </div>
+        <button type="submit" class="auth-btn">Iniciar Sesión</button>
+      </form>
+      <div class="auth-switch">
+        ¿No tienes una cuenta? <a href="#" id="showRegister">Regístrate aquí</a>
+      </div>
+      <button type="button" id="closeLogin" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer;">×</button>
+    </div>
+  </div>
+
+  <!-- Modal para registro -->
+  <div id="registerModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div class="auth-form">
+      <h2>Crear Cuenta</h2>
+      <div id="registerError" class="error-message"></div>
+      <div id="registerSuccess" class="success-message"></div>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="registerName">Nombre Completo</label>
+          <input type="text" id="registerName" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Correo Electrónico</label>
+          <input type="email" id="registerEmail" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Contraseña</label>
+          <input type="password" id="registerPassword" name="password" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="registerConfirmPassword">Confirmar Contraseña</label>
+          <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+        </div>
+        <button type="submit" class="auth-btn">Registrarse</button>
+      </form>
+      <div class="auth-switch">
+        ¿Ya tienes una cuenta? <a href="#" id="showLogin">Inicia sesión aquí</a>
+      </div>
+      <button type="button" id="closeRegister" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer;">×</button>
+    </div>
+  </div>
+
+  <script>
+    // Sistema de autenticación
+    document.addEventListener('DOMContentLoaded', function() {
+      // Elementos del DOM
+      const authNav = document.getElementById('auth-nav');
+      const loginModal = document.getElementById('loginModal');
+      const registerModal = document.getElementById('registerModal');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const showRegister = document.getElementById('showRegister');
+      const showLogin = document.getElementById('showLogin');
+      const closeLogin = document.getElementById('closeLogin');
+      const closeRegister = document.getElementById('closeRegister');
+      const loginError = document.getElementById('loginError');
+      const loginSuccess = document.getElementById('loginSuccess');
+      const registerError = document.getElementById('registerError');
+      const registerSuccess = document.getElementById('registerSuccess');
+
+      // Verificar si el usuario ya está autenticado
+      function checkAuthStatus() {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (user) {
+          // Usuario autenticado
+          authNav.innerHTML = `
+            <div class="user-menu">
+              <button class="user-menu-btn">
+                <span>${user.name}</span>
+                <span>▼</span>
+              </button>
+              <div class="user-dropdown">
+                <a href="#" id="profileLink">Mi Perfil</a>
+                <a href="#" id="logoutLink">Cerrar Sesión</a>
+              </div>
+            </div>
+          `;
+          
+          // Agregar eventos para los enlaces del menú de usuario
+          document.getElementById('logoutLink').addEventListener('click', logout);
+        } else {
+          // Usuario no autenticado
+          authNav.innerHTML = `
+            <li><a href="#" id="loginLink">Iniciar Sesión</a></li>
+          `;
+          document.getElementById('loginLink').addEventListener('click', showLoginModal);
+        }
+      }
+
+      // Mostrar modal de inicio de sesión
+      function showLoginModal() {
+        loginModal.style.display = 'flex';
+      }
+
+      // Mostrar modal de registro
+      function showRegisterModal() {
+        registerModal.style.display = 'flex';
+      }
+
+      // Cerrar modales
+      function closeModals() {
+        loginModal.style.display = 'none';
+        registerModal.style.display = 'none';
+        loginError.style.display = 'none';
+        loginSuccess.style.display = 'none';
+        registerError.style.display = 'none';
+        registerSuccess.style.display = 'none';
+      }
+
+      // Iniciar sesión
+      function login(email, password) {
+        // Obtener usuarios del localStorage
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        
+        // Buscar usuario
+        const user = users.find(u => u.email === email && u.password === password);
+        
+        if (user) {
+          // Guardar usuario actual en localStorage
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          
+          // Mostrar mensaje de éxito
+          loginSuccess.textContent = '¡Inicio de sesión exitoso!';
+          loginSuccess.style.display = 'block';
+          
+          // Actualizar interfaz después de un breve retraso
+          setTimeout(() => {
+            closeModals();
+            checkAuthStatus();
+          }, 1500);
+          
+          return true;
+        } else {
+          // Mostrar mensaje de error
+          loginError.textContent = 'Correo electrónico o contraseña incorrectos';
+          loginError.style.display = 'block';
+          return false;
+        }
+      }
+
+      // Registrar nuevo usuario
+      function register(name, email, password) {
+        // Obtener usuarios del localStorage
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        
+        // Verificar si el usuario ya existe
+        const existingUser = users.find(u => u.email === email);
+        
+        if (existingUser) {
+          registerError.textContent = 'Ya existe un usuario con este correo electrónico';
+          registerError.style.display = 'block';
+          return false;
+        }
+        
+        // Crear nuevo usuario
+        const newUser = {
+          id: Date.now().toString(),
+          name,
+          email,
+          password,
+          registrationDate: new Date().toISOString()
+        };
+        
+        // Guardar usuario
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        
+        // Iniciar sesión automáticamente
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
+        
+        // Mostrar mensaje de éxito
+        registerSuccess.textContent = '¡Cuenta creada exitosamente!';
+        registerSuccess.style.display = 'block';
+        
+        // Actualizar interfaz después de un breve retraso
+        setTimeout(() => {
+          closeModals();
+          checkAuthStatus();
+        }, 1500);
+        
+        return true;
+      }
+
+      // Cerrar sesión
+      function logout() {
+        localStorage.removeItem('currentUser');
+        checkAuthStatus();
+      }
+
+      // Validar formulario de registro
+      function validateRegisterForm(name, email, password, confirmPassword) {
+        if (password !== confirmPassword) {
+          registerError.textContent = 'Las contraseñas no coinciden';
+          registerError.style.display = 'block';
+          return false;
+        }
+        
+        if (password.length < 6) {
+          registerError.textContent = 'La contraseña debe tener al menos 6 caracteres';
+          registerError.style.display = 'block';
+          return false;
+        }
+        
+        return true;
+      }
+
+      // Event Listeners
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        login(email, password);
+      });
+
+      registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('registerName').value;
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        const confirmPassword = document.getElementById('registerConfirmPassword').value;
+        
+        if (validateRegisterForm(name, email, password, confirmPassword)) {
+          register(name, email, password);
+        }
+      });
+
+      showRegister.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeModals();
+        showRegisterModal();
+      });
+
+      showLogin.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeModals();
+        showLoginModal();
+      });
+
+      closeLogin.addEventListener('click', closeModals);
+      closeRegister.addEventListener('click', closeModals);
+
+      // Cerrar modal al hacer clic fuera del contenido
+      window.addEventListener('click', function(e) {
+        if (e.target === loginModal) {
+          closeModals();
+        }
+        if (e.target === registerModal) {
+          closeModals();
+        }
+      });
+
+      // Inicializar estado de autenticación
+      checkAuthStatus();
+    });
+  </script>
 </body>
 </html>
